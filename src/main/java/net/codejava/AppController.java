@@ -1,5 +1,7 @@
 package net.codejava;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,5 +30,18 @@ public class AppController {
 		repo.save(user);
 		
 		return "register_success";
+	}
+	
+	@GetMapping("/list_users")
+	public String viewUserList(Model model) {
+		List<User> listUsers = repo.findAll();
+	    model.addAttribute("listUsers", listUsers);
+	    
+		return "users";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
 	}
 }
